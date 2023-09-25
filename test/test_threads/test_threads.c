@@ -1,60 +1,41 @@
+
 #include <stdio.h>
 #include <zephyr.h>
 #include <arch/cpu.h>
 #include <sys/printk.h>
+#include <unity.h>
+#include "threads.h"
 
-#define STACKSIZE 2000
-#define SLEEPTIME 1000
 
-struct k_thread coop_thread;
-K_THREAD_STACK_DEFINE(coop_stack, STACKSIZE);
+void setUp(void) {}
 
-struct k_sem semaphore;
-int counter;
-int semaStatus;
-void thread_entry(void)
+void tearDown(void) {}
+
+void test_lock(void)
 {
+
+    // Take semaphore without giving, then
+    // try and take semaphore
+    struct k_sem sem;
+    int counter = 0;
 	struct k_timer timer;
 	k_timer_init(&timer, NULL, NULL);
-    k_timer_start(&timer, K_MSEC(SLEEPTIME/2), K_NO_WAIT);
-    k_timer_status_sync(&timer);
+    k_sem_init(&sem, 1, 1);
+    k_sem_take(&sem, K_FOREVER);
 
-	while (1) {
-        k_sem_take(&semaphore, K_FOREVER);
-        counter = counter + 1;
-		printk("hello world from %s! Count %d\n", "thread", counter);
-		k_timer_start(&timer, K_MSEC(SLEEPTIME), K_NO_WAIT);
-		k_timer_status_sync(&timer);
-        k_sem_give(&semaphore);
-	}
+    int result = do_loop(&timer, &sem, &counter, "main", K_MSEC(100));
+
+    TEST_ASSERT_EQUAL(1,result);
+    TEST_ASSERT_EQUAL(0, counter);
+
+
+
 }
 
-int main(void)
+
+int main (void)
 {
-    counter = 0;
-    k_sem_init(&semaphore, 1, 1);
-    k_thread_create(&coop_thread,
-                    coop_stack,
-                    STACKSIZE,
-                    (k_thread_entry_t) thread_entry,
-                    NULL,
-                    NULL,
-                    NULL,
-                    K_PRIO_COOP(7),
-                    0,
-                    K_NO_WAIT);
-
-	struct k_timer timer;
-	k_timer_init(&timer, NULL, NULL);
-
-	while (1) {
-        k_sem_take(&semaphore, K_FOREVER);
-        counter = counter + 1;
-		printk("hello world from %s! Count %d\n", "main", counter);
-		k_timer_start(&timer, K_MSEC(SLEEPTIME), K_NO_WAIT);
-		k_timer_status_sync(&timer);
-        k_sem_give(&semaphore);
-	}
-
-	return 0;
+    UNITY_BEGIN();
+    RUN_TEST(test_lock);
+    return UNITY_END();
 }

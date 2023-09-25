@@ -2,6 +2,7 @@
 #include <zephyr.h>
 #include <arch/cpu.h>
 #include <sys/printk.h>
+#include "threads.h"
 
 #define STACKSIZE 2000
 #define SLEEPTIME 1000
@@ -20,12 +21,7 @@ void thread_entry(void)
     k_timer_status_sync(&timer);
 
 	while (1) {
-        k_sem_take(&semaphore, K_FOREVER);
-        counter = counter + 1;
-		printk("hello world from %s! Count %d\n", "thread", counter);
-		k_timer_start(&timer, K_MSEC(SLEEPTIME), K_NO_WAIT);
-		k_timer_status_sync(&timer);
-        k_sem_give(&semaphore);
+        do_loop(&timer, &semaphore, &counter, "thread", K_FOREVER);
 	}
 }
 
@@ -48,6 +44,8 @@ int main(void)
 	k_timer_init(&timer, NULL, NULL);
 
 	while (1) {
+        do_loop(&timer, &semaphore, &counter, "main", K_FOREVER);
+
         k_sem_take(&semaphore, K_FOREVER);
         counter = counter + 1;
 		printk("hello world from %s! Count %d\n", "main", counter);
