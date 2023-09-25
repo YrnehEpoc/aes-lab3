@@ -16,4 +16,3 @@ int do_loop(struct k_timer *timer,struct k_sem *semaphore, int *counter,
                 k_sem_give(semaphore);
                 return 0;
             }
-

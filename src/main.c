@@ -11,8 +11,11 @@ struct k_thread coop_thread;
 K_THREAD_STACK_DEFINE(coop_stack, STACKSIZE);
 
 struct k_sem semaphore;
+struct k_sem semA;
+struct k_sem semB;
+
 int counter;
-int semaStatus;
+
 void thread_entry(void)
 {
 	struct k_timer timer;
@@ -25,8 +28,31 @@ void thread_entry(void)
 	}
 }
 
+
+int deadlock_thread()
+// There are two threads, and two locks. 
+struct k_timer timer;
+	k_timer_init(&timer, NULL, NULL);
+    k_timer_start(&timer, K_MSEC(SLEEPTIME/2), K_NO_WAIT);
+    k_timer_status_sync(&timer);
+
+	while (semB ) {
+        //execute while sem
+        do_loop(&timer, &semaphore, &counter, "thread1", K_FOREVER);
+	}
+
+//One thread has lock A, and is waiting for a lock B. 
+//The other thread holds lock B and is waiting for resource A.
+
+
+
 int main(void)
 {
+    k_sem_init(&semA,1,1);
+    k_sem_init(&semB,1,1);
+    
+    deadlock_thread();
+
     counter = 0;
     k_sem_init(&semaphore, 1, 1);
     k_thread_create(&coop_thread,
