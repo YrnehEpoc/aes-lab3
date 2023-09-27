@@ -17,7 +17,7 @@ int do_loop(struct k_timer *timer,struct k_sem *semaphore, int *counter,
                 return 0;
             }
 
-int deadlock_thread(struct k_sem *semA, struct k_sem *semB, int *counter){
+int deadlock_thread(struct k_sem *semA, struct k_sem *semB){
 // There are two locks
     struct k_timer timer;
 	k_timer_init(&timer, NULL, NULL);

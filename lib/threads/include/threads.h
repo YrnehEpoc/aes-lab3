@@ -12,5 +12,4 @@ int do_loop(struct k_timer *timer,
             k_timeout_t timeout);
 
 int deadlock_thread(struct k_sem *semA, 
-                    struct k_sem *semB, 
-                    int *counter);
+                    struct k_sem *semB);

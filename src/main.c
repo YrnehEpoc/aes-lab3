@@ -33,9 +33,12 @@ void thread_entry(void)
 
 int main(void)
 {
+
+
     k_sem_init(&semA,1,1);
     k_sem_init(&semB,1,1);
     
+    deadlock_thread(&semA, &semB);
 
     counter = 0;
     k_sem_init(&semaphore, 1, 1);
