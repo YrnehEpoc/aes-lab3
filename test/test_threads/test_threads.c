@@ -80,7 +80,49 @@ void test_deadlock(void)
     k_thread_abort(k_id2);
 }
 
+void test_orphaned_lock(void)
+{
+    struct k_sem sem;
+    k_sem_init(&sem, 1, 1);
+    int count = 1; 
 
+    int orphan_status = orphaned_lock(&sem, &count);
+    TEST_ASSERT_EQUAL(2, count);
+    TEST_ASSERT_EQUAL(2, orphan_status);
+
+    orphan_status = orphaned_lock(&sem, &count);
+    TEST_ASSERT_EQUAL(3, count);
+    TEST_ASSERT_EQUAL(0, orphan_status);
+
+    orphan_status = orphaned_lock(&sem, &count);
+    TEST_ASSERT_EQUAL(3, count);
+    TEST_ASSERT_EQUAL(1, orphan_status);
+}
+
+void test_un_orphaned_lock(void)
+{
+    struct k_sem sem;
+    k_sem_init(&sem, 1, 1);
+    int count = 1; 
+
+    int un_orphan_status = un_orphaned_lock(&sem, &count);
+    TEST_ASSERT_EQUAL(2, count);
+    TEST_ASSERT_EQUAL(2, un_orphan_status);
+
+    un_orphan_status = un_orphaned_lock(&sem, &count);
+    TEST_ASSERT_EQUAL(3, count);
+    TEST_ASSERT_EQUAL(0, un_orphan_status);
+
+    un_orphan_status = un_orphaned_lock(&sem, &count);
+    TEST_ASSERT_EQUAL(4, count);
+    TEST_ASSERT_EQUAL(2, un_orphan_status);
+
+    k_sem_take(&sem, K_FOREVER);
+    un_orphan_status = un_orphaned_lock(&sem, &count);
+    TEST_ASSERT_EQUAL(4, count);
+    TEST_ASSERT_EQUAL(1, un_orphan_status);
+
+}
 
 int main (void)
 {
@@ -88,5 +130,7 @@ int main (void)
     RUN_TEST(test_lock);
     RUN_TEST(test_loop_runs);
     RUN_TEST(test_deadlock);
+    RUN_TEST(test_orphaned_lock);
+    RUN_TEST(test_un_orphaned_lock);
     return UNITY_END();
 }
