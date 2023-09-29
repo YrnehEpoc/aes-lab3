@@ -1,0 +1,81 @@
+//
+// !!! WARNING !!! AUTO-GENERATED FILE!
+// PLEASE DO NOT MODIFY IT AND USE "platformio.ini":
+// https://docs.platformio.org/page/projectconf/section_env_build.html#build-flags
+//
+{
+    "configurations": [
+        {
+            "name": "PlatformIO",
+            "includePath": [
+                "C:/Users/richk/ECE_5960_Lab3/aes-lab3/include",
+                "C:/Users/richk/ECE_5960_Lab3/aes-lab3/src",
+                "C:/Users/richk/ECE_5960_Lab3/aes-lab3/lib/threads/include",
+                "C:/Users/richk/ECE_5960_Lab3/aes-lab3/lib/threads/src",
+                "C:/Users/richk/.platformio/packages/framework-zephyr/include",
+                "C:/Users/richk/ECE_5960_Lab3/aes-lab3/.pio/build/disco_f072rb/zephyr/include/generated",
+                "C:/Users/richk/.platformio/packages/framework-zephyr/soc/arm/st_stm32/stm32f0",
+                "C:/Users/richk/.platformio/packages/framework-zephyr/lib/libc/newlib/include",
+                "C:/Users/richk/.platformio/packages/framework-zephyr/drivers",
+                "C:/Users/richk/.platformio/packages/framework-zephyr/soc/arm/st_stm32/common",
+                "C:/Users/richk/.platformio/packages/framework-zephyr/_pio/modules/hal/cmsis/CMSIS/Core/Include",
+                "C:/Users/richk/.platformio/packages/framework-zephyr/_pio/modules/hal/stm32/stm32cube/stm32f0xx/soc",
+                "C:/Users/richk/.platformio/packages/framework-zephyr/_pio/modules/hal/stm32/stm32cube/stm32f0xx/drivers/include",
+                "C:/Users/richk/.platformio/packages/framework-zephyr/_pio/modules/hal/stm32/stm32cube/stm32f0xx/drivers/include/Legacy",
+                "C:/Users/richk/.platformio/packages/framework-zephyr/_pio/modules/hal/stm32/stm32cube/common_ll/include",
+                ""
+            ],
+            "browse": {
+                "limitSymbolsToIncludedHeaders": true,
+                "path": [
+                    "C:/Users/richk/ECE_5960_Lab3/aes-lab3/include",
+                    "C:/Users/richk/ECE_5960_Lab3/aes-lab3/src",
+                    "C:/Users/richk/ECE_5960_Lab3/aes-lab3/lib/threads/include",
+                    "C:/Users/richk/ECE_5960_Lab3/aes-lab3/lib/threads/src",
+                    "C:/Users/richk/.platformio/packages/framework-zephyr/include",
+                    "C:/Users/richk/ECE_5960_Lab3/aes-lab3/.pio/build/disco_f072rb/zephyr/include/generated",
+                    "C:/Users/richk/.platformio/packages/framework-zephyr/soc/arm/st_stm32/stm32f0",
+                    "C:/Users/richk/.platformio/packages/framework-zephyr/lib/libc/newlib/include",
+                    "C:/Users/richk/.platformio/packages/framework-zephyr/drivers",
+                    "C:/Users/richk/.platformio/packages/framework-zephyr/soc/arm/st_stm32/common",
+                    "C:/Users/richk/.platformio/packages/framework-zephyr/_pio/modules/hal/cmsis/CMSIS/Core/Include",
+                    "C:/Users/richk/.platformio/packages/framework-zephyr/_pio/modules/hal/stm32/stm32cube/stm32f0xx/soc",
+                    "C:/Users/richk/.platformio/packages/framework-zephyr/_pio/modules/hal/stm32/stm32cube/stm32f0xx/drivers/include",
+                    "C:/Users/richk/.platformio/packages/framework-zephyr/_pio/modules/hal/stm32/stm32cube/stm32f0xx/drivers/include/Legacy",
+                    "C:/Users/richk/.platformio/packages/framework-zephyr/_pio/modules/hal/stm32/stm32cube/common_ll/include",
+                    ""
+                ]
+            },
+            "defines": [
+                "PLATFORMIO=60111",
+                "STM32F072xB",
+                "BUILD_VERSION=zephyr-v20701",
+                "HSE_VALUE=8000000",
+                "KERNEL",
+                "STM32F072xB",
+                "USE_FULL_LL_DRIVER",
+                "USE_HAL_DRIVER",
+                "_FORTIFY_SOURCE=2",
+                "__LINUX_ERRNO_EXTENSIONS__",
+                "__PROGRAM_START",
+                "__ZEPHYR__=1",
+                ""
+            ],
+            "cStandard": "c99",
+            "forcedInclude": [
+                "C:/Users/richk/ECE_5960_Lab3/aes-lab3/.pio/build/disco_f072rb/zephyr/include/generated/autoconf.h",
+                "C:/Users/richk/.platformio/packages/framework-zephyr/include/toolchain/zephyr_stdint.h",
+                ""
+            ],
+            "compilerPath": "C:/Users/richk/.platformio/packages/toolchain-gccarmnoneeabi@1.80201.181220/bin/arm-none-eabi-gcc.exe",
+            "compilerArgs": [
+                "-mcpu=cortex-m0",
+                "-mthumb",
+                "-mabi=aapcs",
+                "-mfp16-format=ieee",
+                ""
+            ]
+        }
+    ],
+    "version": 4
+}
