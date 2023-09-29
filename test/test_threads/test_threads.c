@@ -46,10 +46,47 @@ void test_loop_runs(void)
 }
 
 
+
+#define STACK_SIZE 500
+K_THREAD_STACK_DEFINE(thread2_stack, STACK_SIZE); //worker 1
+K_THREAD_STACK_DEFINE(thread3_stack, STACK_SIZE); //worker 2
+
+struct k_thread thread2, thread3;
+
+void test_deadlock(void)
+{
+    struct k_sem semA;
+    struct k_sem semB;
+    k_sem_init(&semA, 1, 1);
+    k_sem_init(&semB, 1, 1);
+
+    //creates first worker thread
+    k_tid_t k_id1 = k_thread_create(&thread2, thread2_stack, STACK_SIZE, 
+                                    (k_thread_entry_t) deadlock_thread, &semA, &semB, 
+                                    NULL, K_PRIO_COOP(7), 0, K_NO_WAIT);
+
+    //creates second worker thread
+    k_tid_t k_id2 = k_thread_create(&thread3, thread3_stack, STACK_SIZE, 
+                                    (k_thread_entry_t) deadlock_thread, &semB, &semA, 
+                                    NULL, K_PRIO_COOP(7), 0, K_NO_WAIT);
+
+    int thread_status1 = k_thread_join(k_id1, K_MSEC(800));
+    int thread_status2 = k_thread_join(k_id2, K_MSEC(800));
+    
+    TEST_ASSERT_EQUAL(-EAGAIN, thread_status1);
+    TEST_ASSERT_EQUAL(-EAGAIN, thread_status2);
+
+    k_thread_abort(k_id1);
+    k_thread_abort(k_id2);
+}
+
+
+
 int main (void)
 {
     UNITY_BEGIN();
     RUN_TEST(test_lock);
     RUN_TEST(test_loop_runs);
+    RUN_TEST(test_deadlock);
     return UNITY_END();
 }
