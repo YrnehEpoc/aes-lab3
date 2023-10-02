@@ -1,7 +1,8 @@
 #pragma once
 #include <stdio.h>
 #include <zephyr/types.h>
-#include <kernel.h>
+#include <kernel/thread.h>
+#include <kernel/thread_stack.h>
 #include <arch/cpu.h>
 #include <sys/printk.h>
 
