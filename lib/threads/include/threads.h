@@ -1,6 +1,6 @@
 #pragma once
 #include <stdio.h>
-#include <zephyr.h>
+#include <zephyr/types.h>
 #include <kernel.h>
 #include <arch/cpu.h>
 #include <sys/printk.h>
