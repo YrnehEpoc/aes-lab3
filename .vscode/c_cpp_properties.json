@@ -23,6 +23,7 @@
                 "C:/Users/richk/.platformio/packages/framework-zephyr/_pio/modules/hal/stm32/stm32cube/stm32f0xx/drivers/include",
                 "C:/Users/richk/.platformio/packages/framework-zephyr/_pio/modules/hal/stm32/stm32cube/stm32f0xx/drivers/include/Legacy",
                 "C:/Users/richk/.platformio/packages/framework-zephyr/_pio/modules/hal/stm32/stm32cube/common_ll/include",
+                "C:/Users/richk/ECE_5960_Lab3/aes-lab3/.pio/libdeps/disco_f072rb/Unity/src",
                 ""
             ],
             "browse": {
@@ -43,6 +44,7 @@
                     "C:/Users/richk/.platformio/packages/framework-zephyr/_pio/modules/hal/stm32/stm32cube/stm32f0xx/drivers/include",
                     "C:/Users/richk/.platformio/packages/framework-zephyr/_pio/modules/hal/stm32/stm32cube/stm32f0xx/drivers/include/Legacy",
                     "C:/Users/richk/.platformio/packages/framework-zephyr/_pio/modules/hal/stm32/stm32cube/common_ll/include",
+                    "C:/Users/richk/ECE_5960_Lab3/aes-lab3/.pio/libdeps/disco_f072rb/Unity/src",
                     ""
                 ]
             },

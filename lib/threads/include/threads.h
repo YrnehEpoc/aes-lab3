@@ -13,3 +13,7 @@ int do_loop(struct k_timer *timer,
 
 int deadlock_thread(struct k_sem *semA, 
                     struct k_sem *semB);
+
+
+int orphaned_lock(struct k_sem *semaphore, int *counter);
+int un_orphaned_lock(struct k_sem *semaphore, int *counter);
